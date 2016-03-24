@@ -240,4 +240,4 @@ local function executeC(addr, arg)
 end
 
 local addr = objAddr(print) + offset
-executeC(addr, bufferAddress(b))
+executeC(addr, bufferAddress(argument))
