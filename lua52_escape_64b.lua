@@ -191,7 +191,7 @@ local function bufferAddress(b)
 end
 
 --[[
-The function will run a new thread (lua_State) with a custome frealloc.
+The function will run a new thread (lua_State) with a custom frealloc.
 The custom frealloc will be called with the following arguments:
 arg a: controlled by the user (i.e. you!)
 arg b: NULL
