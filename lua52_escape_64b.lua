@@ -7,7 +7,7 @@
 	Since this PoC was built for x86_64 the argument will be passed in 
 	the $rdi register, following the x86_64 calling convention in linux.
 	The $rsi register which represents the second argument in the 
-	caliing convention will be set to 0. The value of other parameter 
+	calling convention will be set to 0. The value of other parameter 
 	registers will be undefined.
 	While picking the right instruction to call, it's important to make 
 	sure that the value of the other registers is as expected.
